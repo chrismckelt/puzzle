@@ -2,11 +2,19 @@
 
 # Puzzle
 
-A simple out of the box Visual Studio Angular template.
+> The art of simplicity is a puzzle of complexity. Douglas Horton
 
-Choices
+A simple out of the box Visual Studio Angular template with tests 
 
--- LightBDD for a Behaviour Driven Development framework with Xunit - https://github.com/LightBDD/LightBDD
+#Choices
+
+* Visual Studio 2017 .Net Core Angular template
+* XUnit
+* LightBDD for a Behaviour Driven Development framework with Xunit - https://github.com/LightBDD/LightBDD
 
 
--- Other samples from me in this area --> SpecFlow Acceptance Tests March 2011 http://mckelt.com/blog/?p=140
+## Other samples from me in this area
+
+* SpecFlow Acceptance Tests March 2011 http://mckelt.com/blog/?p=140
+
+* TDD/BDD posts --> http://mckelt.com/blog/?cat=25
