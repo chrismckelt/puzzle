@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Puzzle.Domain
+namespace Puzzle.Domain.Customers
 {
     public class Customer
     {

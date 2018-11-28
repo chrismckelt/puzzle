@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Puzzle.Domain.Products;
-using Puzzle.Domain.Vendors;
 
-namespace Puzzle.Domain
+namespace Puzzle.Domain.Vendors
 {
     /// <summary>
-    /// This would be a REST call to the vendor service - options to cache locally excluded
+    /// Real world example would potentially use
+    /// a cache /  local store to not repeat queries
+    /// Retry/Circuit break libary to ensure resilience (eg the Polly library) 
     /// </summary>
     public class AllTheCloudsService : IAllTheCloudsService
     {

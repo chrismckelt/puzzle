@@ -6,8 +6,10 @@ using LightBDD.Framework.Scenarios.Basic;
 using LightBDD.XUnit2;
 using NSubstitute;
 using Puzzle.Domain;
+using Puzzle.Domain.Customers;
 using Puzzle.Domain.Products;
 using Puzzle.Domain.Vendors;
+using Puzzle.Infrastructure;
 using Shouldly;
 
 namespace Puzzle.Tests.Domain
@@ -20,12 +22,13 @@ namespace Puzzle.Tests.Domain
         public IEnumerable<Product> Products { get; private set; }
 
         private IProductService _productService;
-        private IAllTheCloudsService _vendorServiceMock = NSubstitute.Substitute.For<IAllTheCloudsService>();
+        private readonly IAllTheCloudsService _vendorServiceMock = NSubstitute.Substitute.For<IAllTheCloudsService>();
 
-        readonly IEnumerable<Product> _stubs = new List<Product>()
+        private static readonly IEnumerable<Product> Stubs = new List<Product>()
         {
-            new Product() {Id = Guid.NewGuid(), Name = "P1", Price = 100.99m},
-            new Product() {Id = Guid.NewGuid(), Name = "P2", Price = 1000}, // would love a test databuilder here
+            new Product() {Id = Guid.NewGuid(), Name = "P1", Price = 100d},
+           // new Product() {Id = Guid.NewGuid(), Name = "P2", Price = 1000}, // would love a test databuilder here
+         //   new Product() {Id = Guid.NewGuid(), Name = "P3", Price = 10000.80d}, // would love a test databuilder here
         };
 
         [Scenario]
@@ -39,13 +42,14 @@ namespace Puzzle.Tests.Domain
              * And the prices have a mark-up of 20% above the base price provided by the vendor
              */
 
-            // setup
-            
+            // setup 
+            var copies = Stubs.Select(x=>x.DeepClone()); // convert to value types from reference types
 
-            _vendorServiceMock.GetVendorProducts().ReturnsForAnyArgs(_stubs);
+            _vendorServiceMock.GetVendorProducts().ReturnsForAnyArgs(copies);
 
             _productService = new ProductService(_vendorServiceMock);
             
+            // execute scenarios for feature (LightBDD thing)
             Runner.RunScenario(
                 Given_a_customer, //steps
                 When_the_customer_uses_the_application,
@@ -73,7 +77,12 @@ namespace Puzzle.Tests.Domain
 
         private void And_the_prices_have_a_mark_up_of_20_percent_above_the_base_price_provided_by_the_vendor()
         {
-
+            foreach (var product in Products)
+            {
+                var seed = Stubs.Single(x => x.Id == product.Id);
+                var markup = seed.Price.AddPercent(20);
+                product.Price.ShouldBe(markup);
+            }
         }
     }
 }
