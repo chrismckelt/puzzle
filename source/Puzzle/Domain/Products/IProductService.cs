@@ -4,6 +4,6 @@ namespace Puzzle.Domain.Products
 {
     public interface IProductService
     {
-        IEnumerable<Product> GetProducts();
+        IEnumerable<Product> GetProducts(int markUpPercentage = 20);
     }
 }

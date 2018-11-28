@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Puzzle.Domain.Vendors;
 using Puzzle.Infrastructure;
 
@@ -16,7 +14,7 @@ namespace Puzzle.Domain.Products
             _allTheCloudsService = allTheCloudsService;
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Product> GetProducts(int markUpPercentage = 20)
         {
             var vendorProducts = _allTheCloudsService.GetVendorProducts();
             
@@ -26,7 +24,7 @@ namespace Puzzle.Domain.Products
             var items = vendorProducts as Product[] ?? vendorProducts.ToArray();
             foreach (var item in items)
             {
-                item.Price = item.Price.AddPercent(20);// here we are marking up the product price by 20%
+                item.Price = item.Price.AddPercent(markUpPercentage);// here we are marking up the product price by 20%
             }
 
             return items;

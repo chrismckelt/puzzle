@@ -1,19 +1,17 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Puzzle.Infrastructure
 {
     public static class Extensions
     {
-        public static double Percent(this double number,int percent)
+        public static decimal Percent(this decimal number,int percent)
         {
-            //return ((double) 80         *       25)/100;
-            return ((double)number * percent) / 100;
+            //return ((decimal) 80         *       25)/100;
+            return ((decimal)number * percent) / 100;
         }
 
-        public static double AddPercent(this double number,int percent)
+        public static decimal AddPercent(this decimal number,int percent)
         {
             return number + number.Percent(percent);
         }
