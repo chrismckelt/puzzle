@@ -1,4 +1,5 @@
 ﻿using System;
+using Puzzle.Domain.Products;
 
 namespace Puzzle.Domain.Customers
 {
@@ -8,5 +9,7 @@ namespace Puzzle.Domain.Customers
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public DateTime CreatedUtcDateTime { get; set; }
+        public CurrencyRateType CurrencyRate { get; set; } = CurrencyRateType.Aud;
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.ComponentModel;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Puzzle.Infrastructure
@@ -27,6 +29,24 @@ namespace Puzzle.Infrastructure
                 objResult = (T)bf.Deserialize(ms);
             }
             return objResult;
+        }
+
+
+        /// <summary>
+        /// taken from my favourite package --> https://www.nuget.org/packages/ExtensionMinder/
+        /// </summary>
+        /// <param name="enumerationValue"></param>
+        /// <returns></returns>
+        public static string GetDescription(this Enum enumerationValue)
+        {
+            if (enumerationValue == null)
+                return null;
+            var attributes =
+                (DescriptionAttribute[])
+                enumerationValue.GetType()
+                    .GetField(enumerationValue.ToString())
+                    .GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return attributes.Length > 0 ? attributes[0].Description : enumerationValue.ToString();
         }
     }
 }
