@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using LightBDD.XUnit2;
+using NSubstitute;
 using Puzzle.Domain.Customers;
+using Puzzle.Domain.Orders;
 using Puzzle.Domain.Products;
 using Puzzle.Domain.Vendors;
 using Puzzle.Infrastructure;
@@ -17,7 +20,9 @@ namespace Puzzle.Tests
         public IEnumerable<Product> Products { get; protected set; }
 
         protected IProductService ProductService;
+        protected IOrderService OrderService;
         protected readonly IAllTheCloudsService VendorServiceMock = NSubstitute.Substitute.For<IAllTheCloudsService>();
+        protected Guid OrderId;
 
         protected static readonly IEnumerable<Product> Stubs = new List<Product>()
         {
@@ -26,34 +31,61 @@ namespace Puzzle.Tests
             new Product() {Id = Guid.NewGuid(), Name = "P3", Price = 10000.80m}, // would love a test databuilder here
         };
 
-        // sorry richard banks
+        protected Order Order;
+
+
         #region Given
 
         protected void Given_a_customer()
         {
-            // GWT  is customer needed for this scenario?
-            Customer = new Customer();
+            Customer = new Customer
+            {
+                Id = Guid.NewGuid(),
+                CreatedUtcDateTime = DateTime.UtcNow
+            };
+        }
+
+        protected void And_the_customer_has_entered_their_name_and_email_address(string firstname, string surname, string email)
+        {
+            if (Customer != null)
+            {
+                Customer.FirstName = firstname;
+                Customer.Surname = surname;
+                Customer.Email = email;
+            }
         }
 
         #endregion
 
         #region When
 
-        protected void When_the_customer_uses_the_application(CurrencyRateType? currencyRate)
+        protected void When_the_customer_uses_the_application(CurrencyRateType? currencyRate = null)
         {
-            if (currencyRate.HasValue)
-            {
-                Products = ProductService.GetProducts(currencyRate.Value);
-            }
-            else
-            {
-                Products = ProductService.GetProducts();
-            }
+            Products = currencyRate.HasValue ? ProductService.GetProducts(currencyRate.Value) : ProductService.GetProducts();
         }
 
         protected void When_the_customer_selects_from_the_available_currencies()
         {
             Customer.CurrencyRate = CurrencyRateType.Gbp; // customer chooses GDP
+        }
+
+
+        protected void When_the_customer_submits_an_order()
+        {
+            OrderService = new OrderService(VendorServiceMock);
+            Order = new Order
+            {
+                Customer = Customer,
+                ProductQuantities = new Dictionary<Product, int>()
+            };
+
+            Order.AddProduct(Products.First());
+            Order.AddProduct(Products.First());
+
+            Order.ProductQuantities.Count.ShouldBe(1);
+            Order.ProductQuantities.First().Value.ShouldBe(2);  // we added the same product twice (so quantity = 2)
+
+            OrderId = OrderService.CreateOrder(Order);
         }
 
         #endregion
@@ -93,6 +125,17 @@ namespace Puzzle.Tests
                 var markup = seed.Price.AddPercent(20) *rate;
                 product.Price.ShouldBe(markup);
             }
+        }
+
+        public void Then_the_product_and_quantity_is_added_to_the_order()
+        {
+           Order.ProductQuantities.Count.ShouldNotBe(0);
+            Order.ProductQuantities.First().Value.ShouldBe(2); //1 product added twice
+        }
+
+        public void And_the_order_is_submitted_to_the_vendor_api()
+        {
+            VendorServiceMock.Received().CreateOrder(Order);
         }
 
         #endregion

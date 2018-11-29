@@ -18,3 +18,7 @@ A simple out of the box Visual Studio Angular template with tests
 * SpecFlow Acceptance Tests March 2011 http://mckelt.com/blog/?p=140
 
 * TDD/BDD posts --> http://mckelt.com/blog/?cat=25
+
+## LightBDD will output tests in the Given When Then format below
+
+![image](https://user-images.githubusercontent.com/662868/49256107-eb85f100-f468-11e8-91bb-5e60fba310c3.png)

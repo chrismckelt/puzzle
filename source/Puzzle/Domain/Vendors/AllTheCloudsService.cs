@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Puzzle.Domain.Customers;
+using Puzzle.Domain.Orders;
 using Puzzle.Domain.Products;
 
 namespace Puzzle.Domain.Vendors
@@ -21,6 +23,17 @@ namespace Puzzle.Domain.Vendors
         public IEnumerable<Product> GetVendorProducts()
         {
             return DummyData;
+        }
+
+        public Guid CreateOrder(Order order)
+        {
+            Console.WriteLine($"{order.Customer.Id}");
+            foreach (var product in order.ProductQuantities)
+            {
+                Console.WriteLine($"{product.Key.Name} quantity:{product.Value}");
+            }
+
+            return Guid.NewGuid(); // return vendors id for order
         }
     }
 }
