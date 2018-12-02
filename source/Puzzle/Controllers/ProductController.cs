@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Puzzle.Domain.Products;
 
@@ -21,6 +18,12 @@ namespace Puzzle.Controllers
         public IEnumerable<Product> List()
         {
             return _productService.GetProducts();
+        }
+
+        [HttpGet("[action]/{currencyRate}")]
+        public IEnumerable<Product> GetProducts(CurrencyRateType currencyRate)
+        {
+            return _productService.GetProducts(currencyRate);
         }
     }
 }

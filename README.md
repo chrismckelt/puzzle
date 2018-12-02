@@ -22,9 +22,6 @@ A simple out of the box Visual Studio Angular template with tests
 
 
 
-
-
-
 ## The Problem
 
 You work for a company that is a reseller for a vendor that sells cloud products. The vendor provides an API at http://alltheclouds.com.au . Your company would like to build an application that allows your customers to view the available products and their prices and to make orders.
@@ -59,3 +56,6 @@ As a customer I want to submit an order so that I can purchase products
     And the customer has entered their name and email address 
     When the customer submits the order 
     Then the order is submitted to the vendor API
+	
+	
+![image](https://user-images.githubusercontent.com/662868/49337908-0ff2f080-f656-11e8-9015-ae1108191aba.png)

@@ -2,32 +2,76 @@
   <h1>Puzzle Store</h1>
 </div>
 
-
-<div class="panel panel-default">
+<div id="customer-panel" class="panel panel-default">
   <div class="panel-body">
-
-<p *ngIf="!products"><em>Loading...</em></p>
-
-<h2>Select a product...</h2>
-<ul class="products list-group">
-  <li class="list-group-item" *ngFor="let product of products"
-   (click)="onSelect(product)">
-    <span class="badge">{{product.price | currency}}</span>
-    {{product.name}}
-  </li>
-</ul>
-
-<div *ngIf="selectedProduct">
-  <h2>{{selectedProduct.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{selectedProduct.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="selectedProduct.name" placeholder="name">
-    </label>
-  </div>
-
-</div>
+    <h2>Step 1 - Customer register</h2>
+      <div class="form-group row">
+        <label for="first-name" class="col-sm-2 col-form-label">First name</label>
+        <div class="col-sm-10">
+          <input type="input" class="form-control" id="first-name" placeholder="" [(ngModel)]="order.customer.firstName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="surname" class="col-sm-2 col-form-label">Surname</label>
+        <div class="col-sm-10">
+          <input type="input" class="form-control" id="surname" placeholder="" [(ngModel)]="order.customer.surname">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="email" value="email@example.com" [(ngModel)]="order.customer.email">
+        </div>
+      </div>
   </div>
 </div>
 
+<div id="product-panel" class="panel panel-default">
+  <div class="panel-body">
+    <h2>Step 2 - Product list</h2>
+    <p *ngIf="!products"><em>Loading...</em></p>
 
+    <div class="form-group row">
+      <label for="currency" class="col-sm-2 col-form-label">Currency</label>
+      <div class="col-sm-10">
+        <select class="col-sm-2 col-form-label" (click)="onSelectCurrency(($event.target.value))">
+          <option value="AUD">AUD</option>
+          <option value="GBP">GBP</option>
+          <option value="USD">USD</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <ul class="products list-group">
+        <li class="list-group-item" *ngFor="let product of products" (click)="onSelectProduct(product)">
+          <span class="badge">{{product.price | currency}}</span>
+          {{product.name}}
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div id="order-panel" class="panel panel-default">
+  <div class="panel-body">
+    <h2>Step 3 - Confirm order quantities</h2>
+    <table class="table">
+      <th>Product name</th>
+      <th>Quantity</th>
+      <th>Quantity</th>
+      <tr *ngFor="let key of this.selectedProducts">
+        <td>
+          {{key.name}}
+        </td>
+        <td>
+          {{key.price | currency}}
+        </td>
+        <td>
+          {{getProductQuantity(key)}}
+        </td>
+      </tr>
+    </table>
+    <button type="submit" class="btn btn-primary" (click)="submitOrder()">Submit Order</button>
+  </div>
+</div>

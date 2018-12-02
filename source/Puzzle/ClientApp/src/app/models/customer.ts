@@ -1,10 +1,10 @@
-
-export interface Customer
+import { CurrencyRateType } from './currencyratetype';
+export class Customer
     {
-        Id: string;
-        FirstName: string;
-        Surname: string;
-        CreatedUtcDateTime: Date | string;
-        CurrencyRate: CurrencyRateType;
-        Email: string;
+        id: string;
+        firstName: string;
+        surname: string;
+        createdUtcDateTime: Date | string;
+        currencyRate: CurrencyRateType;
+        email: string;
     }
