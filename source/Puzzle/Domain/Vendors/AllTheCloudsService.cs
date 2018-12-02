@@ -15,9 +15,24 @@ namespace Puzzle.Domain.Vendors
     {
         private static readonly IEnumerable<Product> DummyData = new List<Product>()
         {
-            new Product(){Id = Guid.NewGuid(),Name = "Toy 1"},
-            new Product(){Id = Guid.NewGuid(),Name = "Bike 1"},
-            new Product(){Id = Guid.NewGuid(),Name = "Kite 1"}
+            new Product()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Bike",
+                Price = 200
+            },
+            new Product()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Marbles",
+                Price = 9
+            },
+            new Product()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Yo Yo",
+                Price = 3
+            },
         };
 
         public IEnumerable<Product> GetVendorProducts()

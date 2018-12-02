@@ -1,0 +1,21 @@
+{
+  "name": "puzzle",
+  "version": "1.0.0",
+  "description": "demo app",
+  "main": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "puzzle"
+  },
+  "keywords": [
+    "puzzle"
+  ],
+  "author": "chris mckelt",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/cli": "^7.1.0"
+  }
+}

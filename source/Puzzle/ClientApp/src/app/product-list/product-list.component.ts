@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/product';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css']
 })
-export class HomeComponent {
+export class ProductListComponent {
   public products: Product[];
   public selectedProduct:Product;
 
@@ -21,3 +21,4 @@ export class HomeComponent {
     this.selectedProduct = prod;
   }
 }
+
