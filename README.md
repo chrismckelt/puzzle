@@ -10,7 +10,7 @@ A simple out of the box Visual Studio Angular template with tests
 * XUnit
 * LightBDD for a Behaviour Driven Development framework with Xunit - https://github.com/LightBDD/LightBDD
 
-    Thought I would try LightBDD as I have never used it before
+    **Thought I would try LightBDD as I have never used it before**
 
 ## Other samples from me in this area
 
