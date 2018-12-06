@@ -2,15 +2,12 @@
 
 > The art of simplicity is a puzzle of complexity. Douglas Horton
 
-A simple out of the box Visual Studio Angular template with tests 
+A playground for using Light BDD as an acceptance test framework.
 
-## Choices
-
+## Tech
 * Visual Studio 2017 .Net Core Angular template
 * XUnit
 * LightBDD for a Behaviour Driven Development framework with Xunit - https://github.com/LightBDD/LightBDD
-
-    **Thought I would try LightBDD as I have never used it before**
 
 ## Other samples from me in this area
 
@@ -23,10 +20,12 @@ A simple out of the box Visual Studio Angular template with tests
 ![image](https://user-images.githubusercontent.com/662868/49256107-eb85f100-f468-11e8-91bb-5e60fba310c3.png)
 
 
-
 ## The Problem
 
-You work for a company that is a reseller for a vendor that sells cloud products. The vendor provides an API at http://alltheclouds.com.au . Your company would like to build an application that allows your customers to view the available products and their prices and to make orders.
+You work for a company that is a reseller for a vendor that sells cloud products. The vendor provides an API.
+
+Your company would like to build an application that allows your customers to view the available products and their prices and to make orders.
+
 #### User Story #1
 As a customer I want to view a list of products with prices so that I can make informed decisions about what products to order
 ##### Acceptance Criteria
@@ -34,8 +33,10 @@ As a customer I want to view a list of products with prices so that I can make i
     When the customer uses the application 
     Then a list of products with descriptions and prices is displayed 
     And the prices have a mark-up of 20% above the base price provided by the vendor
+    
 #### User Story #2
 As a customer I want to view prices in my local currency so that I don’t have to manually calculate how much products are going to cost
+
 ##### Acceptance Criteria
     Given a customer 
     When the customer is using the application 
@@ -44,10 +45,10 @@ As a customer I want to view prices in my local currency so that I don’t have 
 	Given a customer is viewing the product list 
 	When the customer selects from the available currencies 
 	Then the prices should be displayed in the selected currency
+	
 #### User Story #3 
-This story is optional; however, you are encouraged to complete it if you have time.
-
 As a customer I want to submit an order so that I can purchase products
+
 ##### Acceptance Criteria
     Given a customer 
     When the customer is viewing the product list 
